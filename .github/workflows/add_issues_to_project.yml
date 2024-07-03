@@ -28,24 +28,24 @@ jobs:
       - uses: alex-page/github-project-automation-plus@v0.3.0
         if: "github.event.action == 'opened'"
         with:
-          project: 報告されたバグ/要望
+          project: ${{env.PROJECT_NAME}}
           column: 未確認
           repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
       - uses: alex-page/github-project-automation-plus@v0.3.0
         if: "github.event.action == 'assigned'"
         with:
-          project: 報告されたバグ/要望
+          project: ${{env.PROJECT_NAME}}
           column: 調査/実装待ち
           repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
       - uses: alex-page/github-project-automation-plus@v0.3.0
         if: "github.event.action == 'reopened'"
         with:
-          project: 報告されたバグ/要望
+          project: ${{env.PROJECT_NAME}}
           column: 調査/実装待ち
           repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
       - uses: alex-page/github-project-automation-plus@v0.3.0
         if: "github.event.action == 'closed'"
         with:
-          project: 報告されたバグ/要望
+          project: ${{env.PROJECT_NAME}}
           column: 完了
           repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
