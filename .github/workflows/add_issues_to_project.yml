@@ -6,8 +6,11 @@ on:
   issues:
     types:
       - opened
+      - closed
+      - assigned
+      - reopened
 env:
-  BUG_PROJECT: 
+  PROJECT_NAME: 報告されたバグ/要望
 jobs:
   add-to-project:
     name: Add issue to project
@@ -15,5 +18,34 @@ jobs:
     steps:
       - uses: actions/add-to-project@v0.4.0
         with:
-          project-url: https://github.com/users/DusKong/projects/1/views/3
+          project-url: https://github.com/users/DusKong/projects/1
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
+  move_project_card:
+    runs-on: ubuntu-latest
+    name: Move Project Card
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.3.0
+        if: "github.event.action == 'opened'"
+        with:
+          project: ${{env.PROJECT_NAME}}
+          column: 未実装
+          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+      - uses: alex-page/github-project-automation-plus@v0.3.0
+        if: "github.event.action == 'assigned'"
+        with:
+          project: ${{env.PROJECT_NAME}}
+          column: 調査/実装待ち
+          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+      - uses: alex-page/github-project-automation-plus@v0.3.0
+        if: "github.event.action == 'reopened'"
+        with:
+          project: ${{env.PROJECT_NAME}}
+          column: 調査/実装待ち
+          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+      - uses: alex-page/github-project-automation-plus@v0.3.0
+        if: "github.event.action == 'closed'"
+        with:
+          project: ${{env.PROJECT_NAME}}
+          column: 完了
+          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
