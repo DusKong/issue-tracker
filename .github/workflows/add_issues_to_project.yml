@@ -29,7 +29,7 @@ jobs:
         if: "github.event.action == 'opened'"
         with:
           project: 報告されたバグ/要望
-          column: 未実装
+          column: 未確認
           repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
       - uses: alex-page/github-project-automation-plus@v0.3.0
         if: "github.event.action == 'assigned'"
