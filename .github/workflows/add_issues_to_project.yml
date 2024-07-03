@@ -10,7 +10,7 @@ on:
       - assigned
       - reopened
 env:
-  PROJECT_NAME: 報告されたバグ/要望
+  PROJECT_NAME: TEST
 jobs:
   add-to-project:
     name: Add issue to project
