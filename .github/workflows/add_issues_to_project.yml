@@ -20,32 +20,3 @@ jobs:
         with:
           project-url: https://github.com/users/DusKong/projects/1
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-
-  move_project_card:
-    runs-on: ubuntu-latest
-    name: Move Project Card
-    steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.3
-        if: "github.event.action == 'opened'"
-        with:
-          project: ${{env.PROJECT_NAME}}
-          column: 未確認
-          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-      - uses: alex-page/github-project-automation-plus@v0.8.3
-        if: "github.event.action == 'assigned'"
-        with:
-          project: ${{env.PROJECT_NAME}}
-          column: 調査/実装待ち
-          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-      - uses: alex-page/github-project-automation-plus@v0.8.3
-        if: "github.event.action == 'reopened'"
-        with:
-          project: ${{env.PROJECT_NAME}}
-          column: 調査/実装待ち
-          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
-      - uses: alex-page/github-project-automation-plus@v0.8.3
-        if: "github.event.action == 'closed'"
-        with:
-          project: ${{env.PROJECT_NAME}}
-          column: 完了
-          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
